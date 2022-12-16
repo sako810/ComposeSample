@@ -34,7 +34,7 @@
                 android:value="" />
         </activity>
 
-        <service android:name=".MyDownloadService"
+        <service android:name="net.hiraok.movie.MyDownloadService"
             android:exported="false">
             <!-- This is needed for Scheduler -->
             <intent-filter>

@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ComposeSample"
-include ':app'
+include (":app", ":media:movie", ":common")

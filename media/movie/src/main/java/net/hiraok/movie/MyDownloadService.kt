@@ -1,4 +1,4 @@
-package net.hiraok.composesample
+package net.hiraok.movie
 
 import android.app.*
 import android.content.Context
