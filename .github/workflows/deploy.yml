@@ -43,8 +43,7 @@ jobs:
       uses: slackapi/slack-github-action@v1.23.0
       with:
         channel-id: github
-        with:
-          payload-file-path: "./docs/payload/slack_payload.json"
+        payload-file-path: "./docs/payload/slack_payload.json"
       env:
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
