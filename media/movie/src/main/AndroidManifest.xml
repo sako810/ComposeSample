@@ -5,7 +5,7 @@
 
     <application>
         <service
-            android:name=".MyDownloadService"
+            android:name="net.hiraok.movie.MyDownloadService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.exoplayer.downloadService.action.RESTART" />

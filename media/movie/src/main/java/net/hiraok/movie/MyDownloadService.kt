@@ -18,11 +18,9 @@ import androidx.media3.exoplayer.scheduler.Scheduler
 import java.io.File
 
 @UnstableApi
-class MyDownloadService(
-    private val context: Context
-) : DownloadService(1) {
+class MyDownloadService : DownloadService(1) {
 
-    val downloadNotificationHelper = DownloadNotificationHelper(context, "download")
+    val downloadNotificationHelper = DownloadNotificationHelper(applicationContext, "download")
 
     private val listener = object : Listener {
 
@@ -37,11 +35,11 @@ class MyDownloadService(
                 }
 
                 Download.STATE_COMPLETED -> {
-                    val intent = TaskStackBuilder.create(context).run {
+                    val intent = TaskStackBuilder.create(applicationContext).run {
                         getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
                     }
                     downloadNotificationHelper.buildDownloadCompletedNotification(
-                        context,
+                        applicationContext,
                         android.R.drawable.ic_dialog_alert,
                         intent,
                         "download Complete"
@@ -49,11 +47,11 @@ class MyDownloadService(
                     Log.i("download", "download complete")
                 }
                 Download.STATE_FAILED -> {
-                    val intent = TaskStackBuilder.create(context).run {
+                    val intent = TaskStackBuilder.create(applicationContext).run {
                         getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
                     }
                     downloadNotificationHelper.buildDownloadCompletedNotification(
-                        context,
+                        applicationContext,
                         android.R.drawable.ic_dialog_alert,
                         intent,
                         "download Fail"
@@ -81,7 +79,7 @@ class MyDownloadService(
     }
 
     override fun getDownloadManager(): DownloadManager {
-        val databaseProvider = StandaloneDatabaseProvider(context)
+        val databaseProvider = StandaloneDatabaseProvider(applicationContext)
         val downloadCache = SimpleCache(
             File("${this.getExternalFilesDir(null)?.path}/cache"),
             NoOpCacheEvictor(),
@@ -90,7 +88,7 @@ class MyDownloadService(
         val dataSourceFactory = DefaultHttpDataSource.Factory()
         val downloadExecutor = Runnable::run
         val downloadManager = DownloadManager(
-            context,
+            applicationContext,
             databaseProvider,
             downloadCache,
             dataSourceFactory,
@@ -101,7 +99,7 @@ class MyDownloadService(
     }
 
     override fun getScheduler(): Scheduler {
-        return PlatformScheduler(context, 0)
+        return PlatformScheduler(applicationContext, 0)
     }
 
     override fun getForegroundNotification(
