@@ -13,11 +13,12 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -28,8 +29,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        compose = true
+    }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 }
 
@@ -94,4 +101,5 @@ dependencies {
     implementation( "androidx.media3:media3-exoplayer-rtsp:1.0.0-beta03")
     implementation( "androidx.media3:media3-exoplayer-smoothstreaming:1.0.0-beta03")
     implementation( "androidx.media3:media3-test-utils-robolectric:1.0.0-beta03")
+    testImplementation("junit:junit:4.12")
 }

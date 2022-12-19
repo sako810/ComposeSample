@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("android")
+    kotlin("android")
 }
 
 android {
@@ -21,8 +21,8 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+        release {
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -32,6 +32,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.2"
@@ -55,4 +58,5 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.0-alpha02")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.navigation:navigation-compose:2.5.3")
+    testImplementation("junit:junit:4.12")
 }

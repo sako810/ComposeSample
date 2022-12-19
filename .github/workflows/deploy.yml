@@ -33,9 +33,9 @@ jobs:
         git commit -m "Update version ${{ env.tag }}"
         git push
     - name: Clean build
-      run: ./gradlew :media:movie clean build
+      run: ./gradlew media:movie:clean build
     - name: Deploy
       run: |
-        ./gradlew :media:movie publish
+        ./gradlew media:movie:publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
