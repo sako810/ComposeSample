@@ -1,0 +1,29 @@
+name: Package_Release
+run-name: Notification Update Package 🚀
+on:
+  registry_package:
+    types: [ published, updated ]
+jobs:
+  deploy_jobs:
+    runs-on: macos-latest
+    steps:
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        payload: |
+          {
+            "text": "New Packages :tada:",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "${{ github.event.github.event.release.name }}, ${{ github.event.release.html_url }}"
+                }
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
