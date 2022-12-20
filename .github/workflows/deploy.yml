@@ -40,10 +40,38 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: slack-send
+      if: ${{ success() }}
       uses: slackapi/slack-github-action@v1.23.0
       with:
         channel-id: github
-        payload-file-path: "./docs/payload/slack_payload.json"
+        payload: |
+          {
+            "text": "New Release Package :rocket:",
+            "blocks": [
+              { "type": "divider" },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "## テストテキスト"
+                }
+              },
+              { "type": "divider" },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": $values.button_text
+                    },
+                    "url": $values.button_url
+                  }
+                ]
+              }
+            ]
+          }
       env:
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
