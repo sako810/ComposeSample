@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ComposeSample"
 include (":app", ":media:movie", ":common")
+include(":map")
