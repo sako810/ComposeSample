@@ -40,9 +40,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          event-type: published
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: hiraok/ComposeSample
-          client-payload: '{ "name": "ああああ" }'
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        event-type: published
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: hiraok/ComposeSample
+        client-payload: '{ "name": "ああああ" }'
