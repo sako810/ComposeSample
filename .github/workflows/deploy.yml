@@ -39,16 +39,10 @@ jobs:
         ./gradlew media:movie:publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Set var of request header
-      if: ${{ success() }}
-      run: |
-        echo ::set-env name=REQUEST_HEADER::"'"Accept:application/vnd.github.everest-preview+json"'"
-    - name: Set var of request body
-      run: |
-        echo ::set-env name=REQUEST_BODY::'{"event_type": "published", "client_payload": { "name": "ああああ"}}'
-    - name: Repository dispatch
-      run: |
-        curl -X POST https://api.github.com/repos/hiraok/ComposeSample/dispatches \
-        -H $REQUEST_HEADER \
-        -u ${{ secrets.GITHUB_TOKEN }} \
-        --data "$REQUEST_BODY"
+    - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: published
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: hiraok/ComposeSample
+          client-payload: '{ "name": "ああああ" }'
