@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/map" />
             <option value="$PROJECT_DIR$/media" />
             <option value="$PROJECT_DIR$/media/movie" />
+            <option value="$PROJECT_DIR$/museum" />
           </set>
         </option>
       </GradleProjectSettings>
