@@ -1,16 +1,11 @@
-name: Deploy
-run-name: Deploy Library 🚀
+name: Notification
+run-name: Notification Dispatch 📢
 on: repository_dispatch
 jobs:
   Release:
     runs-on: macos-latest
     steps:
-    - name: release test
-      run: |
-        echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.name }}'"
     - name: Release Notification
-      id: C04F35WGW3Z
-      if: github.event.action == 'published'
       uses: slackapi/slack-github-action@v1.23.0
       with:
         payload: |
@@ -27,5 +22,5 @@ jobs:
             ]
           }
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
