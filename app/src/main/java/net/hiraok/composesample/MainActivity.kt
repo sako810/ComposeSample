@@ -3,8 +3,13 @@ package net.hiraok.composesample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
@@ -38,7 +43,7 @@ class MainActivity : ComponentActivity() {
                         BottomNavigation {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentDestination = navBackStackEntry?.destination
-                            Screens.values().forEach { screen ->
+                            Screens.entries.forEach { screen ->
                                 BottomNavigationItem(
                                     icon = {
                                         Icon(
@@ -77,6 +82,13 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Home() {
+    Column() {
+
     }
 }
 
