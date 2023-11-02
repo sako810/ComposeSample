@@ -39,6 +39,7 @@ import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.ui.PlayerView
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 
 @UnstableApi
@@ -313,11 +314,7 @@ fun MovieItem(
 
         Image(
             contentScale = ContentScale.Crop,
-            painter = rememberImagePainter(data = movie.preview,
-                builder = {
-                    placeholder(R.drawable.no_img)
-                    crossfade(true)
-                }),
+            painter = rememberAsyncImagePainter(model = movie.preview),
             contentDescription = "Thumbnail",
             modifier = Modifier
                 .height(120.dp)

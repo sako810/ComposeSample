@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "net.hiraok.composesample"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "net.hiraok.composesample"
@@ -27,15 +27,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
     kotlinOptions {
-        jvmTarget = "19"
+       jvmTarget = "17"
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
@@ -60,4 +59,5 @@ dependencies {
     testImplementation("io.github.takahirom.roborazzi:roborazzi:1.8.0-alpha-4")
     testImplementation("io.github.takahirom.roborazzi:roborazzi-compose:1.8.0-alpha-4")
     testImplementation("io.github.takahirom.roborazzi:roborazzi-junit-rule:1.8.0-alpha-4")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
 }
