@@ -39,6 +39,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -54,13 +59,15 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:1.5.4")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
     implementation("androidx.compose.material:material:1.5.4")
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
     implementation("androidx.navigation:navigation-compose:2.7.5")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("io.github.takahirom.roborazzi:roborazzi:1.8.0-alpha-4")
     testImplementation("io.github.takahirom.roborazzi:roborazzi-compose:1.8.0-alpha-4")
     testImplementation("io.github.takahirom.roborazzi:roborazzi-junit-rule:1.8.0-alpha-4")
     testImplementation("org.robolectric:robolectric:4.11.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
 }

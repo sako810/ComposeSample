@@ -1,5 +1,6 @@
 package net.hiraok.composesample
 
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onParent
@@ -18,22 +19,12 @@ import org.robolectric.annotation.GraphicsMode
 class HomeScreenRobot {
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<MainActivity>()
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
     fun captureRoboImageSample() {
-        // Tips: You can use Robolectric with Espresso API
-        // launch
         ActivityScenario.launch(MainActivity::class.java)
-
-        // Capture screen
-        onView(ViewMatchers.isRoot())
-            // If you don't specify a screenshot file name, Roborazzi will automatically use the method name as the file name for you.
-            // The format of the file name will be as follows:
-            // build/outputs/roborazzi/com_..._ManualTest_captureRoboImageSample.png
-            .captureRoboImage()
-
-        // Capture Jetpack Compose Node
+        onView(ViewMatchers.isRoot()).captureRoboImage()
         composeTestRule.onNodeWithTag("Home")
             .onParent()
             .captureRoboImage("build/home.png")
