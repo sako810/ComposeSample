@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -91,21 +92,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Home() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().testTag("Home"),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text("init diff")
     }
-}
-
-@Composable
-@Preview(
-    showBackground = true,
-    showSystemUi = true
-)
-fun HomePreview() {
-    Home()
 }
 
 @Composable
