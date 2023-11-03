@@ -19,7 +19,7 @@ import org.robolectric.annotation.GraphicsMode
 class HomeScreenRobot {
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
     fun captureRoboImageSample() {
