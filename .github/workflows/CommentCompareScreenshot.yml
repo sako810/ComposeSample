@@ -6,9 +6,6 @@ on:
       - CompareScreenshot
     types:
       - completed
-
-permissions: { }
-
 jobs:
   Comment-CompareScreenshot:
     if: >
