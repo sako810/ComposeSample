@@ -1,0 +1,68 @@
+name: on_pull_request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      # チェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # JDKのセットアップ
+      - name: set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Gradleのキャッシュ復元
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Screenshotダウンロード
+      - uses: dawidd6/action-download-artifact@v2
+        continue-on-error: true
+        with:
+          name: screenshot
+          workflow: UnitTest.yml
+          branch: develop
+
+      # テスト
+      - name: Test with Gradle
+        run: ./gradlew testDebugUnitTest
+
+      # ScreenshotTestの結果とテストレポートをUploadする
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: screenshot
+          path: |
+            **/build/outputs/roborazzi
+          retention-days: 30
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: screenshot-reports
+          path: |
+            **/build/reports
+          retention-days: 30
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: screenshot-test-results
+          path: |
+            **/build/test-results
+          retention-days: 30
