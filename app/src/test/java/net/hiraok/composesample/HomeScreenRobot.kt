@@ -17,7 +17,7 @@ class HomeScreenRobot {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun captureRoboImageSample() {
+    fun `スクリーンテスト`() {
         composeTestRule.setContent {
             Home()
         }
