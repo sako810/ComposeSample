@@ -97,7 +97,7 @@ fun Home() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("init diff diff3")
+        Text("init diff diff4")
     }
 }
 
