@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: dawidd6/action-download-artifact@246dbf436b23d7c49e21a7ab8204ca9ecd1fe615 # v2.27.0
+      - uses: dawidd6/action-download-artifact@v2
         with:
           name: pr
           run_id: ${{ github.event.workflow_run.id }}
@@ -44,7 +44,7 @@ jobs:
           git branch -D "$BRANCH_NAME" || true
           git checkout --orphan "$BRANCH_NAME"
           git rm -rf .
-      - uses: dawidd6/action-download-artifact@246dbf436b23d7c49e21a7ab8204ca9ecd1fe615 # v2.27.0
+      - uses: dawidd6/action-download-artifact@v2
         with:
           run_id: ${{ github.event.workflow_run.id }}
           name: screenshot-diff
@@ -90,7 +90,7 @@ jobs:
         shell: bash
         run: |
           # Find all the files ending with _compare.png in roborazzi folder
-          files=$(find . -type f -name "*_compare.png" | grep "roborazzi/" | grep -E "^[a-zA-Z0-9_./-]+$")
+          files=$(find . -type f -name "*_compare.png" | grep "roborazzi/")
           delimiter="$(openssl rand -hex 8)"
           {
             echo "reports<<${delimiter}"

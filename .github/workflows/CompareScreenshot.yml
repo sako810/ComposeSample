@@ -32,7 +32,6 @@ jobs:
         with:
           gradle-version: wrapper
 
-
       - uses: dawidd6/action-download-artifact@v2
         continue-on-error: true
         with:
