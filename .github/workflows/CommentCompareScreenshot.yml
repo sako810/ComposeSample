@@ -76,9 +76,7 @@ jobs:
           
           # Check for invalid file names and add only valid ones
           for file in $files_to_add; do
-            if [[ "$file" =~ ^[a-zA-Z0-9_./-]+$ ]]; then
               git add "$file"
-            fi
           done
           git config --global user.name ScreenshotBot
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
