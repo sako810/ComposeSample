@@ -26,7 +26,8 @@ class HomeScreenRobot {
         composeTestRule.setContent {
             Home()
         }
-        composeTestRule.onNode(isRoot()).captureRoboImage()
+        composeTestRule.onNode(isRoot())
+            .captureRoboImage("build/outputs/roborazzi/screenshotTest.png")
         composeTestRule.onNodeWithText("init diff diff3")
     }
 
