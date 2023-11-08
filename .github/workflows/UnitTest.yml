@@ -29,34 +29,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - uses: dawidd6/action-download-artifact@v2
-        continue-on-error: true
-        with:
-          name: screenshot
-          workflow: UnitTest.yml
-          branch: develop
-
       - name: Test with Gradle
         run: ./gradlew testDebugUnitTest
-
-      - uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: screenshot
-          path: |
-            **/build/outputs/roborazzi
-          retention-days: 30
-      - uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: screenshot-reports
-          path: |
-            **/build/reports
-          retention-days: 30
-      - uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: screenshot-test-results
-          path: |
-            **/build/test-results
-          retention-days: 30
