@@ -3,7 +3,7 @@ name: compare_screenshot_comment
 on:
   workflow_run:
     workflows:
-      - compare_screenshot
+      - CompareScreenshot
     types:
       - completed
 jobs:
