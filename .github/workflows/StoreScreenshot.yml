@@ -31,7 +31,7 @@ jobs:
       - name: Record Screenshot
         id: record-test
         run: |
-          ./gradlew recordRoborazziDevelopDebug --stacktrace --rerun-tasks
+          ./gradlew recordRoborazziDebug --stacktrace --rerun-tasks
 
       - name: Upload Screenshot
         uses: actions/upload-artifact@v3
