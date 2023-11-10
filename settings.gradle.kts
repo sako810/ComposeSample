@@ -13,6 +13,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ComposeSample"
-include (":app", ":media:movie", ":common")
-include(":map")
-include(":museum")
+include(
+    ":app",
+    ":core",
+    ":feature:map",
+    ":feature:media",
+    ":feature:graphics"
+)
