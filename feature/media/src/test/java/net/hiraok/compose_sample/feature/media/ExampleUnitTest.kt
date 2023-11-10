@@ -1,4 +1,4 @@
-package net.hiraok.feature.map
+package net.hiraok.compose_sample.feature.media
 
 import org.junit.Test
 

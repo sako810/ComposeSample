@@ -1,4 +1,4 @@
-package net.hiraok.feature.media
+package net.hiraok.compose_sample.designsystem
 
 import org.junit.Test
 

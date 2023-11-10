@@ -1,4 +1,4 @@
-package net.hiraok.feature.graphics
+package net.hiraok.compose_sample.feature.graphics
 
 import android.content.Context
 import android.view.MotionEvent
