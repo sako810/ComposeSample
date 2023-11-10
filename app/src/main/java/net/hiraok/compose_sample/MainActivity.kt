@@ -1,4 +1,4 @@
-package net.hiraok.composesample
+package net.hiraok.compose_sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,8 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import net.hiraok.composesample.ui.theme.ComposeSampleTheme
-import net.hiraok.museum.ModelScreen
+import net.hiraok.compose_sample.ui.theme.ComposeSampleTheme
 
 enum class Screens(val title: String) {
     A("HOME"),
@@ -109,5 +108,4 @@ fun Home() {
 
 @Composable
 fun Next() {
-    ModelScreen()
 }

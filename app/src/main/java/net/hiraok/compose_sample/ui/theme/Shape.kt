@@ -1,4 +1,4 @@
-package net.hiraok.composesample.ui.theme
+package net.hiraok.compose_sample.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

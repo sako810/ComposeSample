@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -20,3 +22,4 @@ include(
     ":feature:media",
     ":feature:graphics"
 )
+include(":core:designsystem")

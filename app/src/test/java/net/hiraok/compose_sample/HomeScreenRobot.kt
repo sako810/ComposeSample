@@ -1,4 +1,4 @@
-package net.hiraok.composesample
+package net.hiraok.compose_sample
 
 import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.junit4.createComposeRule
