@@ -59,3 +59,12 @@ jobs:
           path: |
             **/build/test-results
           retention-days: 30
+
+      - name: update PR description
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          DESCRIPTION=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq .body)
+          gh pr edit ${{ github.event.pull_request.number }} --body  "{{追記したいコンテンツ}}
+          ---
+          ${DESCRIPTION}"
