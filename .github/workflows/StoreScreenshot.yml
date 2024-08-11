@@ -10,8 +10,9 @@ jobs:
     timeout-minutes: 20
 
     permissions:
-      contents: read # クローンするときの権限
-      actions: write # Github Artifactにあげるための権限
+      actions: read
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -62,7 +63,7 @@ jobs:
 
       - name: update PR description
         env:
-          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DESCRIPTION=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq .body)
           gh pr edit ${{ github.event.pull_request.number }} --body  "{{追記したいコンテンツ}}
