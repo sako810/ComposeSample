@@ -15,6 +15,8 @@ class AndroidLibraryPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
+                apply("com.google.devtools.ksp")
+                apply("com.google.dagger.hilt.android")
             }
 
             extensions.configure<LibraryExtension> {
@@ -55,6 +57,8 @@ class AndroidLibraryPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("splashscreen").get())
                 add("implementation", libs.findLibrary("okhttp").get())
                 add("implementation", libs.findLibrary("okhttp-logging").get())
+                add("implementation", libs.findLibrary("hilt-android").get())
+                add("ksp", libs.findLibrary("hilt-android-compiler").get())
             }
         }
     }

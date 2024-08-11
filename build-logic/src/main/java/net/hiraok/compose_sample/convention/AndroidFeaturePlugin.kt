@@ -9,7 +9,6 @@ class AndroidFeaturePlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("net.hiraok.library")
                 apply("net.hiraok.compose")
-                apply("net.hiraok.test")
             }
         }
     }

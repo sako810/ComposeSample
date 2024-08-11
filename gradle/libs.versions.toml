@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.2"
-ksp = "2.0.10-1.0.24"
+ksp = "2.0.0-1.0.21"
 kotlin = "2.0.0"
 activity-compose = "1.9.1"
 core-ktx = "1.13.1"
@@ -26,20 +26,23 @@ ktor-server-core-jvm = "2.3.12"
 ktor-server-core-netty-jvm = "2.3.12"
 ktor-server-resources = "2.3.7"
 kotlin-coroutines-jdk8 = "1.7.3"
-hilt = "2.51.1"
+hilt = "2.52"
 screennshot-test = "0.0.1-alpha03"
 agpVersion = "8.5.2"
 screenshot = "0.0.1-alpha03"
 roborazzi = "1.26.0"
 roborectric = "4.13"
 composeUiTest = "1.6.8"
-composeUiTestJunit4 = "1.4.0"
+composeUiTestJunit4 = "1.6.8"
 [libraries]
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 compose-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 roborazzi-gradle-plugin = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 compose-screenshot-test-plugin = { module = "com.android.compose.screenshot:screenshot-test-gradle-plugin", version.ref = "screennshot-test" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -53,7 +56,6 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test", version.ref = "composeUiTest" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeUiTestJunit4" }
 junit = { module = "junit:junit", version.ref = "junit" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
@@ -71,7 +73,6 @@ ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm", version.ref 
 ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref = "ktor-server-resources" }
 kotlin-coroutines-jdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "kotlin-coroutines-jdk8" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.4.11" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
 roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
 roborazzi-junit-rules = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "roborazzi" }

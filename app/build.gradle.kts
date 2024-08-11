@@ -1,5 +1,6 @@
 plugins {
     id("net.hiraok.application")
+    id("net.hiraok.test")
 }
 
 android {

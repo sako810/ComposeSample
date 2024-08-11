@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.compose.gradle.plugin)
     implementation(libs.ksp.gradle.plugin)
+    implementation(libs.hilt.android.gradle.plugin)
     implementation(libs.roborazzi.gradle.plugin)
 }
 
