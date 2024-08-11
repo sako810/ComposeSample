@@ -3,109 +3,69 @@ package net.hiraok.compose_sample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.media3.common.util.UnstableApi
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import net.hiraok.compose_sample.ui.theme.ComposeSampleTheme
 
-enum class Screens(val title: String) {
-    A("HOME"),
-    B("NEXT")
-}
-
-@UnstableApi
+@ExperimentalMaterial3Api
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             val navController = rememberNavController()
+            val selected by remember { mutableStateOf(false) }
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
             ComposeSampleTheme {
                 Scaffold(
                     topBar = {
-                        TopAppBar() {
-
-                        }
+                        TopAppBar(modifier = Modifier.fillMaxWidth(), title = {
+                            Text(text = "Compose Sample")
+                        })
                     },
                     bottomBar = {
-                        BottomNavigation {
-                            val navBackStackEntry by navController.currentBackStackEntryAsState()
-                            val currentDestination = navBackStackEntry?.destination
-                            Screens.entries.forEach { screen ->
-                                BottomNavigationItem(
-                                    icon = {
-                                        Icon(
-                                            Icons.Filled.Favorite,
-                                            contentDescription = null
-                                        )
-                                    },
-                                    label = { Text(screen.title) },
-                                    selected = currentDestination?.hierarchy?.any { it.route == screen.title } == true,
-                                    onClick = {
-                                        navController.navigate(screen.title) {
-                                            popUpTo(navController.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    }
-                                )
-                            }
+                        NavigationBar(modifier = Modifier.fillMaxWidth()) {
+                            NavigationBarItem(
+                                selected = currentDestination?.hierarchy?.any { it.route == "find" } == true,
+                                onClick = { navController.navigate("find") },
+                                icon = { Icon(imageVector = Icons.Default.Search, contentDescription = null) })
+                            NavigationBarItem(
+                                selected = currentDestination?.hierarchy?.any { it.route == "draw" } == true,
+                                onClick = { navController.navigate("draw") },
+                                icon = { Icon(imageVector = Icons.Default.Create, contentDescription = null) })
                         }
                     }
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = "HOME",
+                        startDestination = "find",
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable("HOME") {
-                            Home()
-                        }
-                        composable("NEXT") {
-                            Next()
-                        }
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-fun Home() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .testTag("Home"),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("init diff diff8")
-    }
-}
-
-@Composable
-fun Next() {
 }

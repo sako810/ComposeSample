@@ -1,6 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -17,9 +19,7 @@ dependencyResolutionManagement {
 rootProject.name = "ComposeSample"
 include(
     ":app",
-    ":core",
-    ":feature:map",
-    ":feature:media",
-    ":feature:graphics"
+    ":core:data",
+    ":core:ui",
+    ":feature:top"
 )
-include(":core:designsystem")
