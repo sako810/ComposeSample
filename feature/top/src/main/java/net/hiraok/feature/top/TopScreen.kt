@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun TopScreen() {
     Column {
-        Text(text = "test")
+        Text(text = "test0")
+        Text(text = "test1")
     }
 }
