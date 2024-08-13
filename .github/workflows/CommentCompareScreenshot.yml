@@ -101,16 +101,22 @@ jobs:
             echo "| [$fileName](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file) | ![](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file?raw=true) |" >> "$GITHUB_OUTPUT"
           done
           echo "${delimiter}" >> "$GITHUB_OUTPUT"
-      - name: Update pull Request body
-        uses: actions/github-script@v7
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        if: steps.generate-diff-reports.outputs.reports != ''
         with:
-          script: |
-            github.rest.pulls.update({
-              pull_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: context.payload.pull_request.body + '${{ steps.generate-diff-reports.outputs.reports }}'
-            })
+          issue-number: ${{ steps.get-pull-request-number.outputs.pull_request_number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Snapshot diff report
+      - name: Add or update comment on PR
+        uses: peter-evans/create-or-update-comment@v3
+        if: steps.generate-diff-reports.outputs.reports != ''
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ steps.get-pull-request-number.outputs.pull_request_number }}
+          body: ${{ steps.generate-diff-reports.outputs.reports }}
+          edit-mode: replace
       - name: Cleanup outdated companion branches
         run: |
           git branch -r --format="%(refname:lstrip=3)" | grep companion_ | while read -r branch; do
