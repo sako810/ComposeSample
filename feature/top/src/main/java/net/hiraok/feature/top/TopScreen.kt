@@ -11,6 +11,7 @@ fun TopScreen() {
     Column {
         Text(text = "test0")
         Text(text = "test1")
+        Text(text = "test2")
     }
 }
 
