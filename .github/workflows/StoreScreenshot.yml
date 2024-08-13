@@ -61,14 +61,3 @@ jobs:
           path: |
             **/build/test-results
           retention-days: 30
-
-      - name: Download Screenshot Test
-        uses: actions/down
-
-      - name: update PR description
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DESCRIPTION=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq .body)
-          gh pr edit ${{ github.event.pull_request.number }} --body  "screenshot: 
-          "
