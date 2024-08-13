@@ -17,6 +17,7 @@ jobs:
     permissions:
       actions: read
       contents: write
+      repository-projects: read
       pull-requests: write
 
     runs-on: ubuntu-latest
@@ -101,16 +102,14 @@ jobs:
             echo "| [$fileName](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file) | ![](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file?raw=true) |" >> "$GITHUB_OUTPUT"
           done
           echo "${delimiter}" >> "$GITHUB_OUTPUT"
-      - name: Update PR Body
+      - name: update PR description
         id: update-pr-body
         if: steps.generate-diff-reports.outputs.reports != ''
-        uses: octokit/request-action@v2
-        with:
-          route: PATCH /repos/${{ github.repository }}/pulls/${{ steps.get-pull-request-number.outputs.pull_request_number }}
-          body: |
-            {
-              "body": "### Screenshot Diff Report\n${{ steps.generate-diff-reports.outputs.reports }}"
-            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DESCRIPTION=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq .body)
+          gh pr edit ${{ github.event.pull_request.number }} --body  "${{ steps.generate-diff-reports.outputs.reports }}"
       - name: Cleanup outdated companion branches
         run: |
           git branch -r --format="%(refname:lstrip=3)" | grep companion_ | while read -r branch; do
