@@ -10,8 +10,10 @@ jobs:
     timeout-minutes: 20
 
     permissions:
-      contents: read # クローンするときの権限
-      actions: write # Github Artifactにあげるための権限
+      actions: read
+      contents: write
+      repository-projects: read
+      pull-requests: write
 
     steps:
       - name: Checkout

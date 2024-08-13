@@ -17,6 +17,7 @@ jobs:
     permissions:
       actions: read
       contents: write
+      repository-projects: read
       pull-requests: write
 
     runs-on: ubuntu-latest
@@ -101,22 +102,14 @@ jobs:
             echo "| [$fileName](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file) | ![](https://github.com/${{ github.repository }}/blob/$BRANCH_NAME/$file?raw=true) |" >> "$GITHUB_OUTPUT"
           done
           echo "${delimiter}" >> "$GITHUB_OUTPUT"
-      - name: Find Comment
-        uses: peter-evans/find-comment@v2
-        id: fc
+      - name: update PR description
+        id: update-pr-body
         if: steps.generate-diff-reports.outputs.reports != ''
-        with:
-          issue-number: ${{ steps.get-pull-request-number.outputs.pull_request_number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: Snapshot diff report
-      - name: Add or update comment on PR
-        uses: peter-evans/create-or-update-comment@v3
-        if: steps.generate-diff-reports.outputs.reports != ''
-        with:
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ steps.get-pull-request-number.outputs.pull_request_number }}
-          body: ${{ steps.generate-diff-reports.outputs.reports }}
-          edit-mode: replace
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DESCRIPTION=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq .body)
+          gh pr edit ${{ github.event.pull_request.number }} --body  "${{ steps.generate-diff-reports.outputs.reports }}"
       - name: Cleanup outdated companion branches
         run: |
           git branch -r --format="%(refname:lstrip=3)" | grep companion_ | while read -r branch; do
