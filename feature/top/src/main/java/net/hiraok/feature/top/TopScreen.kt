@@ -13,6 +13,7 @@ fun TopScreen() {
         Text(text = "test1")
         Text(text = "test2")
         Text(text = "test3")
+        Text(text = "test4")
     }
 }
 
